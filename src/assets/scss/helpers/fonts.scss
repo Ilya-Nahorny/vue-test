@@ -1,0 +1,58 @@
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600&display=swap');
+
+html {
+  font-family: 'Work Sans', sans-serif;
+  font-size: 10px;
+}
+
+
+@function strip-unit($value) {
+  @return $value / ($value * 0 + 1);
+}
+
+@mixin fluid-type($min-vw, $max-vw, $min-font-size, $max-font-size) {
+  $u1: unit($min-vw);
+  $u2: unit($max-vw);
+  $u3: unit($min-font-size);
+  $u4: unit($max-font-size);
+
+  @if $u1 == $u2 and $u1 == $u3 and $u1 == $u4 {
+    & {
+      font-size: $min-font-size;
+      @media screen and (min-width: $min-vw) {
+        font-size: calc(#{$min-font-size} + #{strip-unit($max-font-size - $min-font-size)} * ((100vw - #{$min-vw}) / #{strip-unit($max-vw - $min-vw)}));
+      }
+      @media screen and (min-width: $max-vw) {
+        font-size: $max-font-size;
+      }
+    }
+  }
+}
+
+h3 {
+  @include fluid-type(320px, 1000px, 28px, 40px);
+  font-weight: 600;
+  color: #1D1C39;
+  margin-bottom: 34px;
+}
+h4{
+  @include fluid-type(320px, 1000px, 18px, 21px);
+  font-weight: 500;
+  color: #0B0E1F;
+
+}
+p{
+  @include fluid-type(320px, 1000px, 15px, 16px);
+  line-height: 26px;
+  font-weight: 400;
+  color: #494E6A;
+}
+span{
+  text-transform: uppercase;
+  color: #FF22B1;
+  font-weight: 400;
+  font-size: 14px;
+  letter-spacing: 2px;
+  padding-bottom: 9px;
+  display: block;
+}

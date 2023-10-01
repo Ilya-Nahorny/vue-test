@@ -1,0 +1,106 @@
+html {
+  box-sizing: border-box;
+}
+body{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  .container {
+    padding: 5% 6%;
+    display: flex;
+    align-items: start;
+    @media (max-width:1120px) {
+      padding: 6% 7%;
+    }
+    .plan{
+      display: flex;
+      justify-content: space-between;
+      gap: 18.5em;
+      @media (max-width:1120px) {
+        gap: 10.5em;
+      }
+      img{
+        align-self: center;
+        width: 51.3%;
+        display: block;
+        @media (max-width:920px) {
+          display: none;
+        }
+      }
+      .challenges{
+        align-self: start;
+        width:31.78%;
+        min-width: 300px;
+        @media (max-width:920px) {
+          width:100%;
+          min-width: 280px;
+
+        }
+        .dropdown {
+          background-color: #eaeef4;
+          padding: 18px;
+          border-radius: .3em;
+          margin-bottom: 20px;
+          cursor: pointer;
+          position: relative;
+          &_title{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #0B0E1F;
+            transition: .5s;
+          }
+          &_title::after {
+            content: url(../../../assets/dropdown.svg);
+            display: block;
+            transition: transform 0.3s ease;
+            transform: rotateZ(0deg);
+          }
+          &_content {
+            display: none;
+            padding-top: 15px;
+            transition: opacity 0.5s ease;
+            max-height: 0;
+            img{
+              display: none;
+              margin: 0 auto;
+              @media (max-width: 920px) {
+                display: block;
+              }
+            }
+          }
+          &.active{
+            .dropdown_title{
+              color: #4461D7;
+              &::after {
+                transform: rotateX(180deg);
+              }
+            }
+            .dropdown_content{
+              display: block;
+              max-height: fit-content;
+              animation: fadeIn 0.5s ease;
+              img{
+                display: none;
+                @media (max-width: 920px) {
+                  display: block;
+                  }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
